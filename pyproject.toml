@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "resume-parser"
+version = "1.0.0"
+description = "A pluggable resume parsing framework with configurable extraction strategies"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+    "pdfplumber>=0.10.0",
+    "python-docx>=1.1.0",
+    "spacy>=3.7.0",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=9.0.2",
+    "pytest-cov>=7.1.0",
+    "pytest-mock>=3.15.1",
+    "reportlab>=4.4.10",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pytest-mock>=3.12",
+    "reportlab>=4.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=resume_parser --cov-report=term-missing -v"
+
+[tool.coverage.run]
+source = ["src/resume_parser"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.",
+    "if TYPE_CHECKING:",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
