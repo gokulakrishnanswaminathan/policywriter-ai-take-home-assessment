@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import logging
 import sys
+from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -61,6 +62,11 @@ def main() -> None:
     # Output the structured result
     print("\n--- Extracted Resume Data ---")
     print(result.to_json())
+
+    # Save the result to a JSON file alongside the input
+    output_path = Path(file_path).with_suffix(".json")
+    output_path.write_text(result.to_json(), encoding="utf-8")
+    print(f"\nResult saved to: {output_path}")
 
 
 if __name__ == "__main__":
